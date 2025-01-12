@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Optional;
+
 @Service
 public class LoanService {
 
@@ -28,10 +30,13 @@ public class LoanService {
                 userServiceUrl + "/api/users/" + request.userId(),
                 UserDTO.class
         );
+        System.out.println(userDTO);
 
         // Create loan entity with combined data
+        assert userDTO != null;
         Loan loan = Loan.builder()
                 .userId(request.userId())
+                .personIncome(userDTO.getSalary())
                 .personAge(userDTO.getAge())
                 .personHomeOwnership(userDTO.getHomeOwnership())
                 .personEmpLength(userDTO.getEmploymentMonth())
@@ -43,9 +48,13 @@ public class LoanService {
                 .cbPersonDefaultOnFile(request.cbPersonDefaultOnFile())
                 .cbPersonCredHistLength(request.cbPersonCredHistLength())
                 .build();
-
+System.out.println(loan);
         return loanRepository.save(loan);
     }
 
+    public Loan getLoanById(Long id) {
+        Optional<Loan> loanOptional = loanRepository.findById(id);
+        return loanOptional.orElseThrow(() -> new RuntimeException("Loan not found with ID: " + id));
+    }
     // Add other service methods as needed
 }

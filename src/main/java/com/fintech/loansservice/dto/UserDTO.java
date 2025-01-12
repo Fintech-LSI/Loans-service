@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class UserDTO {
     private Integer age;
-    private Integer employmentMonth;
+
+    private Double salary;
     private String homeOwnership;
+    private Integer employmentMonth;
 }

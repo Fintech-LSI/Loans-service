@@ -6,10 +6,7 @@ import com.fintech.loansservice.entity.Loan;
 import com.fintech.loansservice.service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/loans")
@@ -23,11 +20,15 @@ public class LoanController {
         Loan loan = loanService.createLoan(request);
         return ResponseEntity.ok(toLoanResponse(loan));
     }
-
+    @GetMapping("/{id}")
+    public ResponseEntity<LoanResponse> getLoanById(@PathVariable Long id) {
+        Loan loan = loanService.getLoanById(id);
+        return ResponseEntity.ok(toLoanResponse(loan));
+    }
     private LoanResponse toLoanResponse(Loan loan) {
         return LoanResponse.builder()
-                .id(loan.getId())
-                .userId(loan.getUserId())
+
+
                 .personAge(loan.getPersonAge())
                 .personIncome(loan.getPersonIncome())
                 .personHomeOwnership(loan.getPersonHomeOwnership())
