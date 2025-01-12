@@ -56,5 +56,18 @@ System.out.println(loan);
         Optional<Loan> loanOptional = loanRepository.findById(id);
         return loanOptional.orElseThrow(() -> new RuntimeException("Loan not found with ID: " + id));
     }
+
+
+    public void updateLoanStatus(Long id, Integer status) {
+        Loan loan = loanRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Loan not found with id: " + id));
+
+        if (status != 0 && status != 1) {
+            throw new IllegalArgumentException("Invalid status. Status must be 0 or 1.");
+        }
+
+        loan.setLoanStatus(status);
+        loanRepository.save(loan);
+    }
     // Add other service methods as needed
 }

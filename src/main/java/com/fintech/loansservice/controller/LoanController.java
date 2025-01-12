@@ -25,6 +25,12 @@ public class LoanController {
         Loan loan = loanService.getLoanById(id);
         return ResponseEntity.ok(toLoanResponse(loan));
     }
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<String> updateLoanStatus(@PathVariable Long id, @RequestParam Integer status) {
+        loanService.updateLoanStatus(id, status);
+        return ResponseEntity.ok("Loan status updated successfully.");
+    }
+
     private LoanResponse toLoanResponse(Loan loan) {
         return LoanResponse.builder()
 
