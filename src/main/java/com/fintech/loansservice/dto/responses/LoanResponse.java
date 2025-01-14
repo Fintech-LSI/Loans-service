@@ -5,6 +5,9 @@ import lombok.Builder;
 
 @Builder
 public record LoanResponse(
+        @JsonProperty("loan_id")
+        Long loanId,
+
         @JsonProperty("person_age")
         Integer personAge,
 
@@ -39,5 +42,13 @@ public record LoanResponse(
         String cbPersonDefaultOnFile,
 
         @JsonProperty("cb_person_cred_hist_length")
-        Integer cbPersonCredHistLength
+        Integer cbPersonCredHistLength,
+
+        @JsonProperty("probability_of_approval")
+        Float probaApproval,
+
+        @JsonProperty("probability_of_denial")
+        Float probaDenial
+
+
 ) {}

@@ -47,4 +47,8 @@ public class Loan {
 
     @Column(nullable = false)
     private Integer cbPersonCredHistLength;
+
+    private Float probaApproval ;
+
+    private Float probaDenial ;
 }
