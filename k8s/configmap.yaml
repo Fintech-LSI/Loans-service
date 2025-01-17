@@ -25,4 +25,4 @@ data:
             include: "*"
     user:
       service:
-        url: http://user-service:8097  # Using k8s service DNS name
+        url: http://user-service:8090  # Using k8s service DNS name

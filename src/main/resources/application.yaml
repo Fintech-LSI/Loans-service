@@ -1,11 +1,11 @@
 spring:
   config:
-    import: optional:configserver:http://localhost:8889
+    import: optional:configserver:http://config-service:8889
   application:
     name: loans-service
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/loans_service_db  # Ensure this is your actual database name
+    url: jdbc:postgresql://postgres-instance.c122egeymo28.us-east-1.rds.amazonaws.com:5432/loans_service_db  # Ensure this is your actual database name
     username: postgres                             # Database username
     password: password                             # Database password
   jpa:
@@ -14,7 +14,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 user:
   service:
-    url: http://localhost:8090
+    url: http://user-service:8090
 
 management:
   endpoints:
@@ -22,5 +22,5 @@ management:
       exposure:
         include: "*"
 server:
-  port: 8676
+  port: 8097
 
