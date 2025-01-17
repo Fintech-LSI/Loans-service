@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: loans-service
-          image: public.ecr.aws/z1z0w2y6/loans-service:latest  # Update this with your actual image
+          image: public.ecr.aws/z1z0w2y6/loans-service:latest
           ports:
             - containerPort: 8097
           envFrom:
@@ -45,8 +45,7 @@ spec:
               memory: "1Gi"
               cpu: "500m"
           readinessProbe:
-            httpGet:
-              path: /actuator/health
+            tcpSocket:     # Using TCP check instead of HTTP
               port: 8097
             initialDelaySeconds: 30
             periodSeconds: 10

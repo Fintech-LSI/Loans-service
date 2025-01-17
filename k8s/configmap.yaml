@@ -19,21 +19,7 @@ data:
     
     server:
       port: 8097
-    
-    management:
-      endpoints:
-        web:
-          exposure:
-            include: "*"
-          base-path: /actuator
-      endpoint:
-        health:
-          enabled: true
-          probes:
-            enabled: true
-          show-details: always
 
-
-
-
-      
+    user:
+      service:
+        url: http://user-service:8090
