@@ -18,11 +18,18 @@ data:
           ddl-auto: update
     server:
       port: 8097
+      
     management:
       endpoints:
         web:
           exposure:
             include: "*"
+      endpoint:
+        health:
+          show-details: when-authorized
+          probes:
+            enabled: true
+            
     user:
       service:
         url: http://user-service:8090  # Using k8s service DNS name
