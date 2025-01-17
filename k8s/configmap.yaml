@@ -16,20 +16,24 @@ data:
             dialect: org.hibernate.dialect.PostgreSQLDialect
         hibernate:
           ddl-auto: update
+    
     server:
       port: 8097
-      
+    
     management:
       endpoints:
         web:
           exposure:
             include: "*"
+          base-path: /actuator
       endpoint:
         health:
-          show-details: when-authorized
+          enabled: true
           probes:
             enabled: true
-            
-    user:
-      service:
-        url: http://user-service:8090  # Using k8s service DNS name
+          show-details: always
+
+
+
+
+      
