@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loans-service-config
+  namespace: fintech
+data:
+  application.yml: |-
+    spring:
+      application:
+        name: loans-service
+      config:
+        import: optional:configserver:http://config-service:8889
+      jpa:
+        properties:
+          hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+          ddl-auto: update
+    server:
+      port: 8097
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: "*"
+    user:
+      service:
+        url: http://user-service:8097  # Using k8s service DNS name
