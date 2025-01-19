@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
 @Entity
 @Table(name = "loans")
@@ -47,4 +46,8 @@ public class Loan {
 
     @Column(nullable = false)
     private Integer cbPersonCredHistLength;
+
+    private Float probaApproval ;
+
+    private Float probaDenial ;
 }

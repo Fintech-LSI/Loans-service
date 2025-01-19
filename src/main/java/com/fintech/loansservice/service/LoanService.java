@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Optional;
-
 @Service
 public class LoanService {
 
@@ -48,7 +48,7 @@ public class LoanService {
                 .cbPersonDefaultOnFile(request.cbPersonDefaultOnFile())
                 .cbPersonCredHistLength(request.cbPersonCredHistLength())
                 .build();
-System.out.println(loan);
+        System.out.println(loan);
         return loanRepository.save(loan);
     }
 
@@ -58,16 +58,25 @@ System.out.println(loan);
     }
 
 
-    public void updateLoanStatus(Long id, Integer status) {
+    public void updateLoanStatus(Long id, Integer status, Float probaApproval, Float probaDenial) {
         Loan loan = loanRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Loan not found with id: " + id));
 
         if (status != 0 && status != 1) {
             throw new IllegalArgumentException("Invalid status. Status must be 0 or 1.");
         }
-
         loan.setLoanStatus(status);
+        loan.setProbaApproval(probaApproval);
+        loan.setProbaDenial(probaDenial);
         loanRepository.save(loan);
     }
+    public List<Loan> getLoansByUserId(Long userId) {
+        return loanRepository.findByUserId(userId);
+    }
+
+    public List<Loan> getAllLoans() {
+        return loanRepository.findAll();
+    }
+
     // Add other service methods as needed
 }
